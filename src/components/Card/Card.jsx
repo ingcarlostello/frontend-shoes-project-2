@@ -2,6 +2,7 @@ import React from 'react';
 
 // @Material UI
 import Fab from "@material-ui/core/Fab";
+import Rating from '@mui/material/Rating';
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @Styles.js
@@ -11,7 +12,10 @@ import { useStyles } from './styles';
 import { server } from '../../urls/urls';
 import { Link } from 'react-router-dom';
 
-const Card = ({precio, foto, idShoe}) => {
+// @helpers
+import { currency } from '../../helpers/currency';
+
+const Card = ({precio, foto, idShoe, nombreModelo, puntaje}) => {
      const classes = useStyles();
     return (
       <>
@@ -21,42 +25,29 @@ const Card = ({precio, foto, idShoe}) => {
               <img className="" src={`${server}${foto}`} alt="" />
             </div>
           </div>
-          <div className="pt-2 pb-4 px-4 h-32">
+          <div className="pt-2 pb-4 px-4 h-36">
             <div>
-              <h1 className="text-gray-700 font-bold hover:text-gray-900 hover:cursor-pointer">
-                Zapato Belen
+              <h1 className="text-xl text-gray-700 font-bold hover:text-gray-900 hover:cursor-pointer mb-2">
+                {nombreModelo}
               </h1>
               <div className="flex justify-between">
-                <span>
-                  <span className="text-gray-700 tracking-wide">$ 89.900</span>
+                <span className="text-gray-700 tracking-wide">{currency(precio)}</span>
+                <span className="ml-16">
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={puntaje}
+                    precision={0.1}
+                    readOnly
+                  />
                 </span>
-                <span>
-                  <span>
-                    <i className="fas fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fas fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fas fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fas fa-star"></i>
-                  </span>
-                  <span>
-                    <i className="fas fa-star"></i>
-                  </span>
-                </span>
-              </div>
-              <div>
-                <Tooltip title="Agregar al carrito" aria-label="add">
-                  <Fab size="small" color="primary" className={classes.fab}>
-                    <i className="fas fa-cart-arrow-down"></i>
-                  </Fab>
-                </Tooltip>
+                <span>{puntaje}</span>
               </div>
               <Link to={`./productDetail/${idShoe}`}>
-                ver mas...
+                <Tooltip title="Ver más" aria-label="add">
+                  <Fab size="small" color="primary" className={classes.fab}>
+                    <i class="fas fa-search"></i>
+                  </Fab>
+                </Tooltip>
               </Link>
             </div>
           </div>

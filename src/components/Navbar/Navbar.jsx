@@ -1,60 +1,142 @@
-import React from 'react';
+import React, { useState } from "react";
+
+// @React Router Dom
+import { NavLink } from "react-router-dom";
+
+// @Material UI
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Navbar = () => {
-    return (
-      <>
-        <nav className="flex items-center justify-between flex-wrap bg-blue-500 p-6">
-          <div className="flex items-center flex-shrink-0 text-white mr-6">
-            <svg
-              className="fill-current h-8 w-8 mr-2"
-              width="54"
-              height="54"
-              viewBox="0 0 54 54"
-              xmlns="http://www.w3.org/2000/svg"
+  const [openMenuVertical, setOpenMenuVertical] = useState(false);
+
+  const handleMenuVertical = () => {
+    if (!openMenuVertical) {
+      setOpenMenuVertical(true);
+    } else {
+      setOpenMenuVertical(false);
+    }
+  };
+
+  return (
+    <>
+      <nav className="px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative flex items-center justify-between h-16">
+            {/* ---logo--- */}
+            <div className="bg-red-300 flex-shrink-0 flex items-center">
+              <div className="hidden lg:block h-8 w-auto">LOGO</div>
+            </div>
+            {/* ---End logo--- */}
+            {/* -----------------------------Begin Menu horizontal--------------------------------- */}
+            <div className="flex-1 flex justify-between sm:justify-center">
+              <div className="sm:block">
+                <div className="flex space-x-4 hidden sm:block">
+                  <NavLink
+                    to="/"
+                    className="bg-black text-white px-3 py-2 rounded-md text-sm font-medium"
+                    aria-current="page"
+                  >
+                    INICIO
+                  </NavLink>
+
+                  <NavLink
+                    to="women-section"
+                    className="font-bold text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    MUJER
+                  </NavLink>
+
+                  <NavLink
+                    to="men-section"
+                    className="font-bold text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    HOMBRE
+                  </NavLink>
+                </div>
+              </div>
+              <button
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                className="w-10 h-10 p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden"
+                onClick={handleMenuVertical}
+                type="button"
+              >
+                <i className="fas fa-bars"></i>
+              </button>
+            </div>
+            <NavLink
+              to="shopping-car"
+              className="hidden cursor-pointer sm:block"
             >
-              <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-            </svg>
-            <span className="font-semibold text-xl tracking-tight">
-              Tailwind CSS
-            </span>
+              <Badge color="secondary" badgeContent={5}>
+                <ShoppingCartIcon />
+              </Badge>
+            </NavLink>
           </div>
-          <div className="block lg:hidden">
-            <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-              <svg
-                className="fill-current h-3 w-3"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-              </svg>
-            </button>
-          </div>
-          <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-            <div className="text-sm lg:flex-grow">
-              <a
-                href="#responsive-header"
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Inicio
-              </a>
-              <a
-                href="#responsive-header"
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Hombre
-              </a>
-              <a
-                href="#responsive-header"
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-              >
-                Mujer
-              </a>
+          {/* ------------------------------Ended Menu horizontal---------------------------------- */}
+        </div>
+
+        {/* <---menu vertical ----> */}
+        <div
+          className={
+            openMenuVertical
+              ? "w-10/12 float-right z-40 opacity-100 scale-100 transition ease-out duration-200 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+              : "w-10/12 float-right opacity-0 scale-95 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+          }
+        >
+          <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+            <div className="pt-2 pb-6 px-5">
+              <div className="mt-6">
+                <nav className="grid gap-y-8">
+                  <NavLink
+                    onClick={handleMenuVertical}
+                    to="/"
+                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                  >
+                    <i className="fas fa-home"></i>
+                    <span className="ml-3 text-base font-medium text-gray-900">
+                      Inicio
+                    </span>
+                  </NavLink>
+                  <NavLink
+                    onClick={handleMenuVertical}
+                    to="men-section"
+                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                  >
+                    <i className="fas fa-male"></i>
+                    <span className="ml-3 text-base font-medium text-gray-900">
+                      Hombre
+                    </span>
+                  </NavLink>
+                  <NavLink
+                    onClick={handleMenuVertical}
+                    to="women-section"
+                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                  >
+                    <i className="fas fa-female"></i>
+                    <span className="ml-3 text-base font-medium text-gray-900">
+                      Mujer
+                    </span>
+                  </NavLink>
+                  <NavLink
+                    to="shopping-car"
+                    className="cursor-pointer"
+                    onClick={handleMenuVertical}
+                  >
+                    <Badge color="secondary" badgeContent={5}>
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </NavLink>
+                </nav>
+              </div>
             </div>
           </div>
-        </nav>
-      </>
-    );
+        </div>
+        {/* <---end menu vertical ----> */}
+      </nav>
+    </>
+  );
 };
 
 export default Navbar;

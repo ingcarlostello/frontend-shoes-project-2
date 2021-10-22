@@ -12,7 +12,7 @@ const Colecciones = () => {
         <NavLink to="women-section">
           <img src={mujer} alt="mujer" />
           <div className="bg-red-500 w-full">
-            <p className="text-6xl font-bold text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <p className="sm:text-6xl font-bold text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               MUJER
             </p>
           </div>
@@ -24,7 +24,7 @@ const Colecciones = () => {
         <NavLink to="men-section">
           <img src={hombre} alt="mujer" />
           <div className="bg-black w-full">
-            <p className="text-6xl font-bold text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <p className="sm:text-6xl font-bold text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               HOMBRE
             </p>
           </div>

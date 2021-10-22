@@ -7,12 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSlides } from '../../actions/slides';
 
 // @Components
-import Item from './Item';
-
-// @Packages
-import Carousel from "react-material-ui-carousel";
-
-
+import SimpleSlider from './Carrousel';
 
 const HeroSection = () => {
 
@@ -44,17 +39,10 @@ const HeroSection = () => {
     }
 
     return (
-      <>
-        <Carousel
-          animation="slide"
-          navButtonsAlwaysVisible={true}
-          timeout={3000}
-          interval={1700}
-        >
-          {data.map((url, i) => (
-            <Item key={i} url={url} />
-          ))}
-        </Carousel>
+      <>      
+        <SimpleSlider 
+         image={data}
+        />     
       </>
     );
 };
