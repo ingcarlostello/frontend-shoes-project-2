@@ -45,7 +45,7 @@ const Card = ({precio, foto, idShoe, nombreModelo, puntaje}) => {
               <Link to={`./productDetail/${idShoe}`}>
                 <Tooltip title="Ver más" aria-label="add">
                   <Fab size="small" color="primary" className={classes.fab}>
-                    <i class="fas fa-search"></i>
+                    <i className="fas fa-search"></i>
                   </Fab>
                 </Tooltip>
               </Link>

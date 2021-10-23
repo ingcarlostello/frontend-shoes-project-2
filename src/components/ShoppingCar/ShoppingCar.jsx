@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 // @React-Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // @Url's
 import { server } from "../../urls/urls";
@@ -13,62 +13,115 @@ import Tooltip from "@material-ui/core/Tooltip";
 // @Styles.js
 import { useStyles } from "./styles";
 
-
+// @helpers
+import { currency } from "../../helpers/currency";
+import { checkingLocalStorage } from "../../actions/shoppingCarActions";
 
 
 const ShoppingCar = () => {
 
-    const [getLocalStorage, setGetLocalStorage] = useState(JSON.parse(localStorage.getItem('shoes')) || [])
-    console.log(getLocalStorage.nombreZapato);
+  const dispatch = useDispatch()
 
-    const classes = useStyles();
-    const { shoppingCar } = useSelector((state) => state.shoppingCar);
+  const classes = useStyles();
+  
+  const { shoppingCar } = useSelector((state) => state.shoppingCar);
+
+  useEffect(() => {
+    const getShoesFromLocalStorage = () => {
+      dispatch(checkingLocalStorage());
+    };
+    getShoesFromLocalStorage();
+  }, [dispatch]);  
 
   return (
     <>
-      <div class="inline-flex space-x-4 bg-yellow-300">
-        <div class="flex-1 bg-red-300">
-           <div className="bg-green-300 inline-block">
-              <img className="w-80" src={`${server}${shoppingCar.foto === null || '' || undefined ? 'sin nombre' : getLocalStorage.foto} `} alt="" />
-            </div>
+      <div className="px-20">
+        {/* <-------Titulos Tabla-------> */}
+        <div className="mt-20 grid grid-cols-5 border border-gray-400">
+          <div className="flex border border-gray-400">
+            <p className="m-auto">Nombre Producto</p>
+          </div>
+          <div className="flex border border-gray-400">
+            <p className="m-auto">Precio Unitario</p>
+          </div>
+          <div className="flex border border-gray-400">
+            <p className="m-auto">Cantidad</p>
+          </div>
+          <div className="flex border border-gray-400">
+            <p className="m-auto">Total</p>
+          </div>
+          <div className="flex border border-gray-400"></div>
         </div>
-        <div class="flex-1 bg-blue-300">
-           
-              <p>{shoppingCar.nombreZapato === null || '' || undefined ? 'sin nombre' : getLocalStorage.nombreZapato}</p>
-              <p>{shoppingCar.cantidad === null || '' || undefined ? 'sin nombre' : getLocalStorage.cantidad}</p>
-              <p>{shoppingCar.total === null || '' || undefined ? 'sin nombre' : getLocalStorage.total}</p>
-        
-        </div>
-        <div class="flex-1 bg-green-300">
-          <Tooltip title="Agregar al carrito" aria-label="add">
-                <Fab size="small" className={classes.fab}>
-                  <i className="far fa-trash-alt text-white"></i>
-                </Fab>
-              </Tooltip>
+        {/* <-------Titulos Tabla-------> */}
+
+        <div className="grid grid-cols-5">
+          {shoppingCar === null ? (<div>No hay nada en el carrito</div>) : shoppingCar.map((zapato) => (
+            <>
+              <div className="flex justify-around border border-gray-400">
+                <div className="py-4">
+                  <img
+                    className="w-28"
+                    src={`${server}${
+                      zapato.foto === null || "" || undefined
+                        ? "sin nombre"
+                        : zapato.foto
+                    } `}
+                    alt=""
+                  />
+                </div>
+                <div className="flex items-center">
+                  <p>
+                    {zapato.nombreZapato === null || "" || undefined
+                      ? "sin nombre"
+                      : zapato.nombreZapato}
+                  </p>
+
+                  <div className="ml-2 font-bold">
+                    Talla:{" "}
+                    {zapato.talla === null || "" || undefined
+                      ? "sin nombre"
+                      : zapato.talla}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex border border-gray-400">
+                <p className="m-auto">
+                  {zapato.precioUnitario === null || "" || undefined
+                    ? "sin nombre"
+                    : currency(zapato.precioUnitario)}
+                </p>
+              </div>
+
+              <div className="flex border border-gray-400">
+                <p className="m-auto">
+                  {zapato.cantidad === null || "" || undefined
+                    ? "sin nombre"
+                    : zapato.cantidad}
+                </p>
+              </div>
+
+              <div className="flex border border-gray-400">
+                <p className="m-auto">
+                  {zapato.total === null || "" || undefined
+                    ? "sin nombre"
+                    : currency(zapato.total)}
+                </p>
+              </div>
+
+              <div className="flex border border-gray-400">
+                <div className="m-auto">
+                  <Tooltip title="Sacar del carrito" aria-label="add">
+                    <Fab size="small" className={classes.fab}>
+                      <i className="far fa-trash-alt text-white"></i>
+                    </Fab>
+                  </Tooltip>
+                </div>
+              </div>
+            </>
+          ))}
         </div>
       </div>
-      {/* <div className="grid grid-cols-3">
-        <div className="p-4 bg-red-300 col-span-2">
-          <div className="grid grid-cols-3">
-            <div className="bg-green-300 inline-block">
-              <img className="w-20 h-20" src={`${server}${shoppingCar.foto === null || '' || undefined ? 'sin nombre' : getLocalStorage.foto} `} alt="" />
-            </div>
-            <div className="bg-yellow-300">
-              <p>{shoppingCar.nombreZapato === null || '' || undefined ? 'sin nombre' : getLocalStorage.nombreZapato}</p>
-              <p>{shoppingCar.cantidad === null || '' || undefined ? 'sin nombre' : getLocalStorage.cantidad}</p>
-              <p>{shoppingCar.total === null || '' || undefined ? 'sin nombre' : getLocalStorage.total}</p>
-            </div>
-            <div className="bg-purple-300 inline-block">
-              <Tooltip title="Agregar al carrito" aria-label="add">
-                <Fab size="small" className={classes.fab}>
-                  <i className="far fa-trash-alt text-white"></i>
-                </Fab>
-              </Tooltip>
-            </div>
-          </div>
-        </div>
-        <div className="p-4 bg-blue-300">andres</div>
-      </div> */}
     </>
   );
 };

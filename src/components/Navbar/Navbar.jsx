@@ -7,7 +7,12 @@ import { NavLink } from "react-router-dom";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+// @React-redux
+import { useSelector } from "react-redux";
+
 const Navbar = () => {
+    const { shoppingCar } = useSelector((state) => state.shoppingCar);
+
   const [openMenuVertical, setOpenMenuVertical] = useState(false);
 
   const handleMenuVertical = () => {
@@ -41,14 +46,14 @@ const Navbar = () => {
                   </NavLink>
 
                   <NavLink
-                    to="women-section"
+                    to="/women-section"
                     className="font-bold text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     MUJER
                   </NavLink>
 
                   <NavLink
-                    to="men-section"
+                    to="/men-section"
                     className="font-bold text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     HOMBRE
@@ -66,10 +71,10 @@ const Navbar = () => {
               </button>
             </div>
             <NavLink
-              to="shopping-car"
+              to="/shopping-car"
               className="hidden cursor-pointer sm:block"
             >
-              <Badge color="secondary" badgeContent={5}>
+              <Badge color="secondary" badgeContent={ shoppingCar === null ? 0 : shoppingCar.length }>
                 <ShoppingCartIcon />
               </Badge>
             </NavLink>

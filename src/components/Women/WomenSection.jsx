@@ -27,7 +27,7 @@ const WomenSection = () => {
   return (
     <div>
       <div className="w-full h-96 bg-indigo-400 flex">
-        <p class="text-6xl sm:text-8xl text-gray-100 m-auto">Para Mujer</p>
+        <p className="text-6xl sm:text-8xl text-gray-100 m-auto">Para Mujer</p>
       </div>
       {loading ? (
         <div className="flex mt-8">

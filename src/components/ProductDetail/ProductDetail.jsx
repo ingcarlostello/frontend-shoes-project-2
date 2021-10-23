@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-
-
+import React, { useEffect, useState } from "react";
 
 // @React-Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -20,19 +18,33 @@ import { currency } from "../../helpers/currency";
 const ProductDetail = () => {
   const dispatch = useDispatch();
 
+  // useSelectors
   const { shoeDetail } = useSelector((state) => state.productDetail);
+  const { shoppingCar } = useSelector((state) => state.shoppingCar);
 
+  // states
   const [cantidadZapatos, setCantidadZapatos] = useState(1);
   const [tallaZapatos, setTallaZapatos] = useState();
 
   const addShoeToCar = (infoShoe) => {
     dispatch(addItemToShoppingCar(infoShoe));
-    saveInLocalStorage(infoShoe);
   };
 
-  const saveInLocalStorage = (infoShoe) => {
-    localStorage.setItem("shoes", JSON.stringify(infoShoe));
-  };
+  useEffect(() => {
+    const saveInLocalStorage = (listaZapatos) => {
+      if (!listaZapatos){
+        return
+      }else{
+        localStorage.setItem("shoes", JSON.stringify(listaZapatos));
+      }
+    };
+    saveInLocalStorage(shoppingCar);
+  }, [shoppingCar]);
+
+
+
+
+ 
 
   return (
     <>
@@ -102,7 +114,7 @@ const ProductDetail = () => {
                     />
                   </div>
                 </div>
-                <div class="flex-auto flex space-x-3 mt-16">
+                <div className="flex-auto flex space-x-3 mt-16">
                   <button
                     className="w-1/2 p-2 flex items-center justify-center rounded-md bg-black text-white"
                     type="submit"
@@ -110,6 +122,7 @@ const ProductDetail = () => {
                       addShoeToCar({
                         foto: shoeDetail.foto,
                         nombreZapato: shoeDetail.nombre,
+                        precioUnitario: shoeDetail.precio,
                         talla: tallaZapatos,
                         cantidad: cantidadZapatos,
                         total: cantidadZapatos * shoeDetail.precio,

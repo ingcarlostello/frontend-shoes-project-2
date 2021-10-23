@@ -15,8 +15,9 @@ export const types = {
   getMenShoesLoading: "Loading Men shoes",
 
   // Product detail types
-  productDetail: "Product detail",
+  productDetail: "Product detail page",
 
   // Shopping car
   addItemToCar: "Item added to shopping car",
+  getDataFromLocalStorage: "get data from local storage and fill the car",
 };

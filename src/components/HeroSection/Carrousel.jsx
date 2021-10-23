@@ -22,8 +22,8 @@ const SimpleSlider = ({ image }) => {
   return (
     <div>
       <Slider {...settings}>
-        {image.map((img) => (          
-            <img src={`${server}${img}`} className="w-full" alt="img" />       
+        {image.map((img, i) => (          
+            <img key={i} src={`${server}${img}`} className="w-full" alt="img" />       
         ))} 
       </Slider>
     </div>
