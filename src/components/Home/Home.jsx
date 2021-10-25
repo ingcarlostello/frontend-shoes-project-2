@@ -6,9 +6,9 @@ import HeroSection from '../HeroSection/HeroSection';
 
 const Home = () => {
     return (
-      <>       
+      <>
         <HeroSection />
-        <Colecciones />     
+        <Colecciones />      
       </>
     );
 };

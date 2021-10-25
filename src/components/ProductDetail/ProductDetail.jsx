@@ -15,6 +15,7 @@ import Rating from "@mui/material/Rating";
 // @helpers
 import { currency } from "../../helpers/currency";
 
+
 const ProductDetail = () => {
   const dispatch = useDispatch();
 
@@ -39,12 +40,7 @@ const ProductDetail = () => {
       }
     };
     saveInLocalStorage(shoppingCar);
-  }, [shoppingCar]);
-
-
-
-
- 
+  }, [shoppingCar]); 
 
   return (
     <>
@@ -137,7 +133,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-  
     </>
   );
 };
