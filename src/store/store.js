@@ -6,6 +6,8 @@ import { carritoReducer } from "../reducers/carritoReducer";
 import { menShoesReducer } from "../reducers/menSectionReducer";
 import { productDetailReducer } from "../reducers/productDetailReducer";
 import { slidesReducer } from "../reducers/slidesReducer";
+import { starRatingReducer } from "../reducers/StarRatingReducer";
+import { toastNotificationReducer } from "../reducers/toastNotificationReducer";
 import { womenShoesReducer } from "../reducers/womenSectionReducer";
 
 const composeEnhancers =
@@ -19,6 +21,8 @@ const reducers = combineReducers({
   slides: slidesReducer,
   womenShoes: womenShoesReducer,
   shoppingCar: carritoReducer,
+  toastNotification: toastNotificationReducer,
+  stars: starRatingReducer,
 });
 
 export const store = createStore(

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // @Actions
 import { addItemToShoppingCar } from "../../actions/shoppingCarActions";
+import { showToastNotification } from "../../actions/toastNotificationsActions";
 
 // @Url's
 import { server } from "../../urls/urls";
@@ -22,6 +23,7 @@ const ProductDetail = () => {
   // useSelectors
   const { shoeDetail } = useSelector((state) => state.productDetail);
   const { shoppingCar } = useSelector((state) => state.shoppingCar);
+  const {toastNotification} = useSelector(state => state.toastNotification)
 
   // states
   const [cantidadZapatos, setCantidadZapatos] = useState(1);
@@ -29,6 +31,7 @@ const ProductDetail = () => {
 
   const addShoeToCar = (infoShoe) => {
     dispatch(addItemToShoppingCar(infoShoe));
+    dispatch(showToastNotification())
   };
 
   useEffect(() => {

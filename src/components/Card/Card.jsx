@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // @Material UI
 import Fab from "@material-ui/core/Fab";
@@ -8,15 +8,29 @@ import Tooltip from "@material-ui/core/Tooltip";
 // @Styles.js
 import { useStyles } from './styles';
 
+// @actions
+import { fetchStars } from '../../actions/starRatingsAction';
+
 // @Url's
 import { server } from '../../urls/urls';
+
+// @react-router-dom
 import { Link } from 'react-router-dom';
 
 // @helpers
 import { currency } from '../../helpers/currency';
 
+// @redux
+import { useDispatch } from 'react-redux';
+
 const Card = ({precio, foto, idShoe, nombreModelo, puntaje}) => {
      const classes = useStyles();
+     const dispatch = useDispatch()
+
+     useEffect(() => {
+       dispatch(fetchStars())      
+     }, [dispatch])
+     
     return (
       <>
         <div className="mb-6 rounded-lg w-80 shadow-lg hover:shadow-xl transition duration-500">

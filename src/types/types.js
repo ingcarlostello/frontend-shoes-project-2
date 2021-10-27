@@ -20,4 +20,13 @@ export const types = {
   // Shopping car
   addItemToCar: "Item added to shopping car",
   getDataFromLocalStorage: "get data from local storage and fill the car",
+
+  // Toast notifications
+  showToastNotification: "Showing Toast notification",
+  hideToastNotification: "Hidding toast notification",
+
+  // Star Ratings
+  getStarRatingsLoading: "Loading ratings star",
+  getStarRatingError: "Error Loading rating stars",
+  getStarRating: "Star ratings on state",
 };

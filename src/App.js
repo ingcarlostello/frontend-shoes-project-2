@@ -15,23 +15,24 @@ import Home from "./components/Home/Home";
 import MenSection from "./components/Men/MenSection";
 import Navbar from "./components/Navbar/Navbar";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
+import ToastNotification from "./components/ToastNotification/ToastNotification";
 import WomenSection from "./components/Women/WomenSection";
 
 function App() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-   useEffect(() => {
-     const getShoesFromLocalStorage = () => {
-       dispatch(checkingLocalStorage());
-     };
-     getShoesFromLocalStorage();
-   }, [dispatch]);
+  useEffect(() => {
+    const getShoesFromLocalStorage = () => {
+      dispatch(checkingLocalStorage());
+    };
+    getShoesFromLocalStorage();
+  }, [dispatch]);
 
   return (
     <>
       <Router>
         <Navbar />
+        <ToastNotification />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/men-section" component={MenSection} />
